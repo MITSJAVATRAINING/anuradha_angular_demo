@@ -16,7 +16,7 @@
           (chartClick)="chartClicked($event)">
       </canvas> -->
 
-      <canvas baseChart
+      <canvas baseChart #myChart height="500" width="100"
       [datasets]="chartDatasets"
       [labels]="chartLabels"
       [options]="chartOptions"
