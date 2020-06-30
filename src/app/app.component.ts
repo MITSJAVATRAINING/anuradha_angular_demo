@@ -50,6 +50,10 @@ export class AppComponent implements OnInit{
 
   public chartClicked(e: any): void {
     console.log('chart clicked', e);
+
+    if (e.active[0]._model.label === 'Jan') {
+      console.log( ' label is ' , e.active[0]._model.label);
+    }
   }
 
   public chartHovered(e: any): void {

@@ -20,7 +20,8 @@
       [datasets]="chartDatasets"
       [labels]="chartLabels"
       [options]="chartOptions"
-      [chartType]="chartType">
+      [chartType]="chartType"
+      (chartClick)="chartClicked($event)">
       </canvas>
      </div>
                               
