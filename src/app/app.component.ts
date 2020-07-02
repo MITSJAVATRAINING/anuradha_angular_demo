@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
 
   @ViewChild('myChart') Chart: ElementRef;
 
-  public chartType: string = 'bar';
+  public chartType: string = 'doughnut';
 
   public num;
 
@@ -24,7 +24,7 @@ export class AppComponent implements OnInit{
 
   public chartDatasets: Array<any> = [];
 
-  public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
+  public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar'];
 
   // public chartColors: Array<any> = [
   //   {
@@ -51,9 +51,15 @@ export class AppComponent implements OnInit{
   public chartClicked(e: any): void {
     console.log('chart clicked', e);
 
-    if (e.active[0]._model.label === 'Jan') {
-      console.log( ' label is ' , e.active[0]._model.label);
-    }
+    // if (e.active[0]._model.label === 'Jan') {
+    //   console.log( ' label is ' , e.active[0]._model.label);
+    // }
+
+    const index = e.active[0]._index;
+    console.log(index);
+    console.log(this.chartDatasets[0].data[index]);
+    console.log(this.chartLabels[index]);
+
   }
 
   public chartHovered(e: any): void {
@@ -69,6 +75,11 @@ export class AppComponent implements OnInit{
           '#ff3399',
           '#000000',
           '#99ff66'
+          ],
+          hoverBackgroundColor: [
+            '#ff3399',
+            '#000000',
+            '#ffffff'
           ]
         }
       ];
