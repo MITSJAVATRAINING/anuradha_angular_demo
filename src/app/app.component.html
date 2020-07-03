@@ -15,14 +15,27 @@
           (chartHover)="chartHovered($event)" 
           (chartClick)="chartClicked($event)">
       </canvas> -->
-
+<!-- 
       <canvas baseChart #myChart height="500" width="100"
       [datasets]="chartDatasets"
       [labels]="chartLabels"
       [options]="chartOptions"
       [chartType]="chartType"
       (chartClick)="chartClicked($event)">
-      </canvas>
+      </canvas> -->
+
+      <div style="display: block">
+        <canvas baseChart #myChart
+                [chartType]="chartType"
+                [datasets]="chartDatasets"
+                [labels]="chartLabels"
+                [colors]="chartColors"
+                [options]="chartOptions"
+                [legend]="true"
+                (chartHover)="chartHovered($event)">
+        </canvas>
+      </div>
+
      </div>
                               
   
