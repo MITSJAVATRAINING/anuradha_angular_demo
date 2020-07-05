@@ -1,43 +1,75 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { TestService} from './test.service';
-import {Chart } from 'chart.js';
+import { TestService } from './test.service';
+import { Chart } from 'chart.js';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import { BaseChartDirective } from 'ng2-charts';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, AfterViewInit{
+export class AppComponent implements OnInit {
   title = 'test-chart';
 
-  constructor(public testService: TestService) {
 
+  constructor(public testService: TestService) {
   }
 
+  // data: any = [
+  //   {
+  //   eid: 'e101',
+  //   ename: 'ravi',
+  //   esal: 1000
+  //   },
+  //   {
+  //   eid: 'e102',
+  //   ename: 'ram',
+  //   esal: 2000
+  //   },
+  //   {
+  //   eid: 'e103',
+  //   ename: 'rajesh',
+  //   esal: 3000
+  //   }
+  // ];
 
-  @ViewChild('myChart') barCanvas;
+  // EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  // EXCEL_EXTENSION = '.xlsx';
 
-  barChar: Chart;
-
-
-
-  // public chartType: string = 'doughnut';
-
-  // public num;
-
-  public chartType: string = 'bar';
-
-public chartDatasets: Array<any> = [
-  { data: [65, 59], label: 'My First dataset' },
-  { data: [11, 12], label: 'My Second dataset' },
-];
-
-// public chartDatasets: Array<any> = [];
-
-// public chartLabels: Array<any> = ['Jan', 'Feb', 'Mar'];
+  // public exportAsExcelFile(json: any[], excelFileName: string): void {
+  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+  //   const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+  //   const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  //   this.saveAsExcelFile(excelBuffer, excelFileName);
+  // }
+  // private saveAsExcelFile(buffer: any, fileName: string): void {
+  //    const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
+  //    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
+  // }
 
 
-public chartLabels: Array<any> = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'];
+  //   @ViewChild('myChart') barCanvas;
+
+  //   barChar: Chart;
+
+
+
+  //   // public chartType: string = 'doughnut';
+
+  public num;
+
+  public chartType = 'bar';
+
+  @ViewChild(BaseChartDirective, { static: true }) chart: any;
+
+  public chartDatasets: Array<any> = [
+    { data: [65, 59], label: 'My First dataset' },
+    { data: [11, 12], label: 'My Second dataset' },
+  ];
+
+  public chartLabels: Array<any> = ['Jan', 'Feb'];
 
   public chartColors: Array<any> = [
     {
@@ -78,70 +110,60 @@ public chartLabels: Array<any> = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'O
       ],
       borderWidth: 2,
     },
-    ];
+  ];
 
-    public chartOptions: any =  {
-      animation: {
-        duration: 10,
-      },
-      scales: {
-        xAxes: [{
-          stacked: true,
-          gridLines: {
-            display: false
-          },
-        }],
-        yAxes: [{
-          stacked: true
-        }],
-      }
-    };
-
-    ngAfterViewInit() {
-
-      this.barChar = new Chart(this.barCanvas.nativeElement, {
-         type: 'bar',
-         data: {
-           labels: this.chartLabels,
-           datasets: this.chartDatasets
-         },
-         options: {
-          animation: {
-            duration: 10,
-          },
-          scales: {
-            xAxes: [{
-              stacked: true,
-              gridLines: {
-                display: false
-              },
-            }],
-            yAxes: [{
-              stacked: true
-            }],
-          }, // scales
-          legend: {
-            display: true
-          },
-          onClick: this.chartClicked.bind(this),
-        }
-      });
+  public chartOptions: any = {
+    animation: {
+      duration: 10,
+    },
+    scales: {
+      xAxes: [{
+        stacked: true,
+        gridLines: {
+          display: false
+        },
+      }],
+      yAxes: [{
+        stacked: true
+      }],
     }
-
-    public chartClicked(e: any, array): void {
-     // console.log(e.event.layerY);
-      // console.log(this.chartDatasets[e.active[0]._datasetIndex].data[e.active[0]._index]);
-
-      let activeElement = this.barChar.getElementAtEvent(e)[0];
-      console.log(activeElement);
-      console.log(activeElement?._model.label + ' ' + activeElement?._model.datasetLabel);
-      console.log();
-
-    }
-    public chartHovered(e: any): void { }
+  };
 
 
 
+  // ngAfterViewInit() {
+
+  //   this.barChar = new Chart(this.barCanvas.nativeElement, {
+  //      type: 'bar',
+  //      data: {
+  //        labels: this.chartLabels,
+  //        datasets: this.chartDatasets
+  //      },
+  //      options: {
+  //       animation: {
+  //         duration: 10,
+  //       },
+  //       scales: {
+  //         xAxes: [{
+  //           stacked: true,
+  //           gridLines: {
+  //             display: false
+  //           },
+  //         }],
+  //         yAxes: [{
+  //           stacked: true
+  //         }],
+  //       }, // scales
+  //       legend: {
+  //         display: true
+  //       },
+  //       onClick: this.chartClicked.bind(this),
+  //     }
+  //   });
+  // }
+
+
+  // public chartHovered(e: any): void { }
 
 
   // public chartOptions: any = {
@@ -167,7 +189,18 @@ public chartLabels: Array<any> = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'O
   //   console.log('chart hovered', e);
   // }
 
+
+  public chartClicked(e): void {
+    console.log(e);
+
+    console.log(this.chart.chart.tooltip._active[0]._model.datasetLabel);
+    console.log(this.chart.chart.tooltip._active[0]._model.label);
+
+  }
+
   ngOnInit(): void {
+
+    //  this.exportAsExcelFile(this.data, 'sample');
     // this.testService.test().subscribe(response => {
     //   console.log(response);
     //   this.num = response;
@@ -187,6 +220,20 @@ public chartLabels: Array<any> = ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'O
     // });
 
     // this.testService.testS.next(1000);
+
+    // const data: any = [];
+
+    // const uniqueBHSType = ['Hold', 'Buy'];
+
+    // data.forEach(d => {
+    //   if (d.indexof(d.BHSType) === -1 ){
+    //     uniqueBHSType.push(d.BHSType);
+    //   }
+    // });
+
+    // uniqueBHSType.forEach(bhsType => {
+    //   const generic = data.filter(d => d.BHSType = bhsType);
+    // });
   }
 
 

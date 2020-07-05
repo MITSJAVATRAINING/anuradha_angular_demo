@@ -25,16 +25,18 @@
       </canvas> -->
 
       <div style="display: block">
-        <canvas baseChart #myChart
+        <canvas baseChart #mylinechart
                 [chartType]="chartType"
                 [datasets]="chartDatasets"
                 [labels]="chartLabels"
                 [colors]="chartColors"
                 [options]="chartOptions"
                 [legend]="true"
-                (chartHover)="chartHovered($event)">
+                (chartClick)="chartClicked($event)">
         </canvas>
-      </div>
+      </div> 
+
+      Testing Excel
 
      </div>
                               
