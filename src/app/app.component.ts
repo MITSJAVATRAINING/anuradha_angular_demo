@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
 import { TestService } from './test.service';
 import { Chart } from 'chart.js';
 import * as FileSaver from 'file-saver';
@@ -17,37 +17,38 @@ export class AppComponent implements OnInit {
   constructor(public testService: TestService) {
   }
 
-  // data: any = [
-  //   {
-  //   eid: 'e101',
-  //   ename: 'ravi',
-  //   esal: 1000
-  //   },
-  //   {
-  //   eid: 'e102',
-  //   ename: 'ram',
-  //   esal: 2000
-  //   },
-  //   {
-  //   eid: 'e103',
-  //   ename: 'rajesh',
-  //   esal: 3000
-  //   }
-  // ];
+  data: any = [
+    {
+    eid: 'e101',
+    ename: 'ravi',
+    esal: 1000
+    },
+    {
+    eid: 'e102',
+    ename: 'ram',
+    esal: 2000
+    },
+    {
+    eid: 'e103',
+    ename: 'rajesh',
+    esal: 3000
+    }
+  ];
 
-  // EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-  // EXCEL_EXTENSION = '.xlsx';
+  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  EXCEL_EXTENSION = '.xlsx';
 
-  // public exportAsExcelFile(json: any[], excelFileName: string): void {
-  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-  //   const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-  //   const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-  //   this.saveAsExcelFile(excelBuffer, excelFileName);
-  // }
-  // private saveAsExcelFile(buffer: any, fileName: string): void {
-  //    const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
-  //    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
-  // }
+  public exportAsExcelFile(json: any[], excelFileName: string): void {
+    
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+    const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.saveAsExcelFile(excelBuffer, excelFileName);
+  }
+  private saveAsExcelFile(buffer: any, fileName: string): void {
+     const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
+     FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
+  }
 
 
   //   @ViewChild('myChart') barCanvas;
@@ -62,7 +63,10 @@ export class AppComponent implements OnInit {
 
   public chartType = 'bar';
 
-  @ViewChild(BaseChartDirective, { static: true }) chart: any;
+  // @ViewChild('myChart', { static: true }) chart: BaseChartDirective;
+
+  @ViewChildren( BaseChartDirective )
+  charts: QueryList<BaseChartDirective>;
 
   public chartDatasets: Array<any> = [
     { data: [65, 59], label: 'My First dataset' },
@@ -190,17 +194,20 @@ export class AppComponent implements OnInit {
   // }
 
 
-  public chartClicked(e): void {
-    console.log(e);
+  // public chartClicked(e): void {
+  //   console.log(e);
+  //   // if (this.charts[0].chart.tooltip._active[0]) {
+  //   //   console.log('dataset is ', this.charts[0].chart.tooltip._active[0]._model.datasetLabel,
+  //   //    ' and label is ', this.charts[0].chart.tooltip._active[0]._model.label);
+  //   //   console.log();
+  //   //console.log(this.charts);
+  //   console.log(this.charts.first.chart.tooltip._active[0]._model.label);
+  //   console.log(this.charts.first.chart.tooltip._active[0]._model.datasetLabel);
 
-    console.log(this.chart.chart.tooltip._active[0]._model.datasetLabel);
-    console.log(this.chart.chart.tooltip._active[0]._model.label);
-
-  }
+  // }
 
   ngOnInit(): void {
-
-    //  this.exportAsExcelFile(this.data, 'sample');
+    this.exportAsExcelFile(this.data, 'sample');
     // this.testService.test().subscribe(response => {
     //   console.log(response);
     //   this.num = response;
