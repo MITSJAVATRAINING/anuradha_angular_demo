@@ -35,45 +35,26 @@ export class AppComponent implements OnInit {
     }
   ];
 
-  EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
-  EXCEL_EXTENSION = '.xlsx';
+  // EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+  // EXCEL_EXTENSION = '.xlsx';
 
-  public exportAsExcelFile(json: any[], excelFileName: string): void {
-    
-    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
-    const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
-    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    this.saveAsExcelFile(excelBuffer, excelFileName);
-  }
-  private saveAsExcelFile(buffer: any, fileName: string): void {
-     const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
-     FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
-  }
+  // public exportAsExcelFile(json: any[], excelFileName: string): void {
+
+  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(json);
+  //   const workbook: XLSX.WorkBook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
+  //   const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+  //   this.saveAsExcelFile(excelBuffer, excelFileName);
+  // }
+
+  // private saveAsExcelFile(buffer: any, fileName: string): void {
+  //    const data: Blob = new Blob([buffer], {type: this.EXCEL_TYPE});
+  //    FileSaver.saveAs(data, fileName + '_export_' + new  Date().getTime() + this.EXCEL_EXTENSION);
+  // }
 
 
   //   @ViewChild('myChart') barCanvas;
 
   //   barChar: Chart;
-
-
-
-  //   // public chartType: string = 'doughnut';
-
-  public num;
-
-  public chartType = 'bar';
-
-  // @ViewChild('myChart', { static: true }) chart: BaseChartDirective;
-
-  @ViewChildren( BaseChartDirective )
-  charts: QueryList<BaseChartDirective>;
-
-  public chartDatasets: Array<any> = [
-    { data: [65, 59], label: 'My First dataset' },
-    { data: [11, 12], label: 'My Second dataset' },
-  ];
-
-  public chartLabels: Array<any> = ['Jan', 'Feb'];
 
   public chartColors: Array<any> = [
     {
@@ -116,22 +97,115 @@ export class AppComponent implements OnInit {
     },
   ];
 
-  public chartOptions: any = {
-    animation: {
-      duration: 10,
-    },
-    scales: {
-      xAxes: [{
-        stacked: true,
-        gridLines: {
-          display: false
-        },
-      }],
-      yAxes: [{
-        stacked: true
-      }],
+  //   // public chartType: string = 'doughnut';
+
+  public num;
+
+  public chartType = 'bar';
+
+  // @ViewChild('myChart', { static: true }) chart: BaseChartDirective;
+
+  @ViewChildren( BaseChartDirective )
+  charts: QueryList<BaseChartDirective>;
+
+  largeData: any[] = [
+    11, 12, 10, 9, 5, 6, 4, 6, 7, 10, 8, 1,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 2,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 3,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 4,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 5,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 6,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 7,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 8,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 9,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 10
+  ];
+
+  public chartDatasets: Array<any> = [
+    { data: this.largeData }
+  ];
+
+  public chartLabels: Array<any> = [
+    'Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec12',
+    'Jan', 'Feb', 'March', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec24',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec36',
+    'Jan', 'Feb', 'March', 'Apr40', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec48',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec60',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec72',
+    'Jan', 'Feb', 'March', 'Apr80', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec84',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec96',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec108',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec120'
+  ];
+
+  size = 30;
+  arrayOfData = [];
+  arrayOfLabels = [];
+
+  ngOnInit(): void {
+
+    for (let i = 0; i < this.largeData.length; i += this.size) {
+      this.arrayOfData.push( [{ data: this.largeData.slice(i, i + this.size) }]);
+      this.arrayOfLabels.push(this.chartLabels.slice(i, i + this.size));
     }
-  };
+    console.log(this.chartDatasets);
+    console.log(this.arrayOfData);
+
+    // this.exportAsExcelFile(this.data, 'sample'); // shaleen
+    //  this.testService.test().subscribe(response => {
+    //    console.log('In Subscribed blocked');
+    //    console.log(response);
+       // this.num = response;
+       // this.chartDatasets =  [
+       //   { data: [this.num, 646 , 67], label: 'My First dataset', backgroundColor: [
+       //     '#ff3399',
+       //     '#000000',
+       //     '#99ff66'
+       //     ],
+       //     hoverBackgroundColor: [
+       //       '#ff3399',
+       //       '#000000',
+       //       '#ffffff'
+       //     ]
+       //   }
+       // ]; // distribute the money to contra
+    // });
+        // building a org by shaleen
+    // this.testService.testS.next(1000);
+
+    // const data: any = [];
+
+    // const uniqueBHSType = ['Hold', 'Buy'];
+
+    // data.forEach(d => {
+    //   if (d.indexof(d.BHSType) === -1) {
+    //     uniqueBHSType.push(d.BHSType);
+    //   }
+    // });
+
+    // uniqueBHSType.forEach(bhsType => {
+    //   const generic = data.filter(d => d.BHSType = bhsType);
+    // });
+ }
+
+  
+
+  // public chartOptions: any = {
+  //   animation: {
+  //     duration: 10,
+  //   },
+  //   scales: {
+  //     xAxes: [{
+  //       stacked: true,
+  //       gridLines: {
+  //         display: false
+  //       },
+  //     }],
+  //     yAxes: [{
+  //       stacked: true
+  //     }],
+  //   }
+  // };
 
 
 
@@ -206,42 +280,10 @@ export class AppComponent implements OnInit {
 
   // }
 
-  ngOnInit(): void {
-    this.exportAsExcelFile(this.data, 'sample');
-    // this.testService.test().subscribe(response => {
-    //   console.log(response);
-    //   this.num = response;
-    //   this.chartDatasets =  [
-    //     { data: [this.num, 646 , 67], label: 'My First dataset', backgroundColor: [
-    //       '#ff3399',
-    //       '#000000',
-    //       '#99ff66'
-    //       ],
-    //       hoverBackgroundColor: [
-    //         '#ff3399',
-    //         '#000000',
-    //         '#ffffff'
-    //       ]
-    //     }
-    //   ];
-    // });
 
-    // this.testService.testS.next(1000);
 
-    // const data: any = [];
 
-    // const uniqueBHSType = ['Hold', 'Buy'];
-
-    // data.forEach(d => {
-    //   if (d.indexof(d.BHSType) === -1 ){
-    //     uniqueBHSType.push(d.BHSType);
-    //   }
-    // });
-
-    // uniqueBHSType.forEach(bhsType => {
-    //   const generic = data.filter(d => d.BHSType = bhsType);
-    // });
-  }
+ 
 
 
 }

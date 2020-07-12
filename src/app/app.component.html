@@ -15,15 +15,16 @@
           (chartHover)="chartHovered($event)" 
           (chartClick)="chartClicked($event)">
       </canvas> -->
-<!-- 
-      <canvas baseChart #myChart height="500" width="100"
-      [datasets]="chartDatasets"
-      [labels]="chartLabels"
-      [options]="chartOptions"
-      [chartType]="chartType"
-      (chartClick)="chartClicked($event)">
-      </canvas> -->
 
+      <div *ngFor="let labels of arrayOfLabels; let i = index">
+        <canvas baseChart #myChart height="35" width="100"
+        [datasets]="arrayOfData[i]"
+        [labels]="labels"
+        [chartType]="chartType">
+        </canvas>
+      </div>
+    
+<!-- 
       <div style="display: block">
         <canvas baseChart #myChart
                 [chartType]="chartType"
@@ -34,7 +35,7 @@
                 [legend]="true"
                 (chartClick)="chartClicked($event)">
         </canvas>
-      </div> 
+      </div>  -->
 
       Testing Excel
 

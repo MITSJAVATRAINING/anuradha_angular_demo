@@ -31,7 +31,6 @@
     "save": "^2.4.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3",
-    // For Export functionality use these dependenies
     "file-saver": "^2.0.2",
     "xlsx": "^0.16.3"
   },
