@@ -4,6 +4,18 @@
   <!-- Highlight Card -->
   <div class="card highlight-card card-small">
 
+    <div class="chartWrapper">
+      <div class="chartAreaWrapper">
+        <div *ngFor="let labels of arrayOfLabels; let i = index">
+          <canvas baseChart #myChart height="35" width="100" [datasets]="arrayOfData[i]" [labels]="labels"
+            [chartType]="chartType">
+          </canvas>
+        </div>
+    
+      </div>
+    </div>
+  
+
     <div style="display: block">
       <!-- <canvas mdbChart
           [chartType]="chartType"
@@ -16,14 +28,6 @@
           (chartClick)="chartClicked($event)">
       </canvas> -->
 
-      <div *ngFor="let labels of arrayOfLabels; let i = index">
-        <canvas baseChart #myChart height="35" width="100"
-        [datasets]="arrayOfData[i]"
-        [labels]="labels"
-        [chartType]="chartType">
-        </canvas>
-      </div>
-    
 <!-- 
       <div style="display: block">
         <canvas baseChart #myChart
@@ -37,7 +41,7 @@
         </canvas>
       </div>  -->
 
-      Testing Excel
+      <!-- Testing Excel -->
 
      </div>
                               
@@ -58,3 +62,26 @@
     @Output chartClick
    -->
   </div>
+
+  <style>
+.chartWrapper {
+  position: relative;
+    overflow-x: scroll;
+  overflow-y: scroll;
+  /* overflow-x: scroll; */
+}
+
+.chartWrapper > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  width: 100%;
+}
+
+.chartAreaWrapper {
+  width: 2500px;
+  height: 100px;
+}
+
+  </style>

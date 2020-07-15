@@ -118,6 +118,12 @@ export class AppComponent implements OnInit {
     11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 7,
     11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 8,
     11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 9,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 10,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 5,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 6,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 7,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 8,
+    11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 9,
     11, 12, 10, 9, 5, 6, 6, 6, 7, 10, 8, 10
   ];
 
@@ -135,10 +141,16 @@ export class AppComponent implements OnInit {
     'Jan', 'Feb', 'March', 'Apr80', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec84',
     'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec96',
     'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec108',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec120',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec60',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec72',
+    'Jan', 'Feb', 'March', 'Apr80', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec84',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec96',
+    'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec108',
     'Jan', 'Feb', 'March', 'Apr', 'May',  'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec120'
   ];
 
-  size = 30;
+  size = 240;
   arrayOfData = [];
   arrayOfLabels = [];
 
