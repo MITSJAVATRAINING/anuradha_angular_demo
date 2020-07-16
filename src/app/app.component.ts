@@ -4,6 +4,7 @@ import { Chart } from 'chart.js';
 import * as FileSaver from 'file-saver';
 import * as XLSX from 'xlsx';
 import { BaseChartDirective } from 'ng2-charts';
+import { FormBuilder, FormGroup, ValidatorFn, AbstractControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit {
   title = 'test-chart';
 
 
-  constructor(public testService: TestService) {
+  constructor(public testService: TestService, private _fb: FormBuilder) {
   }
 
   data: any = [
@@ -154,7 +155,28 @@ export class AppComponent implements OnInit {
   arrayOfData = [];
   arrayOfLabels = [];
 
+
+  private _employeeFormGroup: FormGroup;
+
+  nameValidator(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+
+      if (control.value && control.value[0] !== 'S') {
+        return { 'nameStart': true};
+      } else {
+        return null;
+      }
+    };
+
+  }
+
   ngOnInit(): void {
+
+    this._employeeFormGroup = this._fb.group({
+      firstName: ['', [Validators.required, this.nameValidator()]],
+      lastName: ['', Validators.required],
+      address: ['', Validators.required]
+    });
 
     for (let i = 0; i < this.largeData.length; i += this.size) {
       this.arrayOfData.push( [{ data: this.largeData.slice(i, i + this.size) }]);
