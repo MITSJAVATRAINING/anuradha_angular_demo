@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddEmployeeComponent } from './add-employee/add-employee.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AddEmployeeComponent
   ],
   imports: [
     BrowserModule,

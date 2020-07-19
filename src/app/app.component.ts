@@ -157,6 +157,8 @@ export class AppComponent implements OnInit {
 
 
   private _employeeFormGroup: FormGroup;
+  employeeName = '';
+  employeeAddress = '';
 
   nameValidator(): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} => {
@@ -168,6 +170,12 @@ export class AppComponent implements OnInit {
       }
     };
 
+  }
+
+  onConnect(event) {
+    console.log('In Child Component');
+    console.log(event);
+    this.employeeAddress = event.msg;
   }
 
   ngOnInit(): void {
