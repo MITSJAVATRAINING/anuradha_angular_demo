@@ -4,17 +4,23 @@ import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddEmployeeComponent } from './add-employee/add-employee.component';
+import { AddDepartmentComponent } from './add-department/add-department.component';
+import { MatCardExampleComponent } from './mat-card-example/mat-card-example.component';
+import { MaterialModule } from './material.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddEmployeeComponent
+    AddEmployeeComponent,
+    AddDepartmentComponent,
+    MatCardExampleComponent
   ],
   imports: [
     BrowserModule,
     ChartsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent]
