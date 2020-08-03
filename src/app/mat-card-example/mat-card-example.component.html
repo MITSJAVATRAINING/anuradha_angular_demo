@@ -1,44 +1,49 @@
-<div class="container">
-  <div class="row" style="padding-top: 10px;">
-    <div class="col-md-7">
+<div>
+
+  <div class="row" *ngFor="let row of capbilityl1Name; let index=index" style="padding: 10px;">
+    <div class="col-md-12">
       <mat-card>
         <mat-card-header>
           <div mat-card class="example-header-image"></div>
-          <mat-card-title>Strategic Outlook</mat-card-title>
+          <mat-card-title>{{row}} </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           <div class="row">
-            <div class="col-md-3">
-                <div class="wrapper">
-                    <div class="outerMatCard"></div>
-                    <mat-icon style="padding-top: 30px;">signal_cellular_alt</mat-icon>
-                    <div class="innerMatCard">Brand Management</div>
+            <div  [ngClass]="{'col-md-5' : index1 == 0,  'col-md-3': index1 == 1, 'col-md-4': index1 == 2}" *ngFor="let l2Name of capbilityl1l2Name.get(row);let index1=index">
+              <div>
+                <div>
+                  <mat-card>
+                  <mat-card-header>
+                    <div mat-card class="example-header-image"></div>
+                    <mat-card-title> {{l2Name}} {{index1}} </mat-card-title>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <div class="row">
+                      <div [ngClass]="{'col-md-3' : index1 == 0,  'col-md-4': index1 == 1, 'col-md-4': index1 == 2}" *ngFor="let l3Name of capbilityl2l3Name.get(l2Name);let index2=index" >
+                          <div class="wrapper">
+                              <div class="outerMatCard"></div>
+                              <mat-icon style="padding-top: 30px;">signal_cellular_alt</mat-icon>
+                              <div class="innerMatCard"> {{l3Name}} {{index2}}</div>
+                          </div>
+                      </div>
+                      <div [ngClass]="{'col-md-3' : (index1 == 0 && index2 == 8)}"> rfre </div>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="wrapper">
-                    <div class="outerMatCard"></div>
-                    <mat-icon style="padding-top: 30px;">signal_cellular_alt</mat-icon>
-                    <div class="innerMatCard">Compaign Management</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="wrapper">
-                    <div class="outerMatCard"></div>
-                    <mat-icon style="padding-top: 30px;">signal_cellular_alt</mat-icon>
-                    <div class="innerMatCard">Communication Management</div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="wrapper">
-                    <div class="outerMatCard"></div>
-                    <mat-icon style="padding-top: 30px;">signal_cellular_alt</mat-icon>
-                    <div class="innerMatCard">Innovation Management</div>
-                </div>
+              </div>
             </div>
           </div>
         </mat-card-content>
       </mat-card>
+
+    </div>
+    
+  </div>
+
+  <div class="row" style="padding-top: 10px;">
+    <div class="col-md-7">
+     
     </div>
   </div>
 </div>
@@ -48,18 +53,26 @@
     position: relative;
     margin-left: 26px;
     margin-top: -31px;
+    font-size: 10px;
   }
 
   .outerMatCard {
     display: inline-block;
     border: 12px solid #ffc107d6;
+    height: 73px;
+    position: absolute;
+  }
+
+  .outerl1MatCard {
+    display: inline-block;
+    border: 12px solid blue;
     height: 90px;
     position: absolute;
   }
 
   .wrapper {
     border: solid 1px;
-    height: 92px;
+    height: 75px;
     width: 135px;
   }
 </style>

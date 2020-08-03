@@ -190,8 +190,8 @@ export class AppComponent implements OnInit {
       this.arrayOfData.push( [{ data: this.largeData.slice(i, i + this.size) }]);
       this.arrayOfLabels.push(this.chartLabels.slice(i, i + this.size));
     }
-    console.log(this.chartDatasets);
-    console.log(this.arrayOfData);
+    // console.log(this.chartDatasets);
+    // console.log(this.arrayOfData);
 
     // this.exportAsExcelFile(this.data, 'sample'); // shaleen
     //  this.testService.test().subscribe(response => {
