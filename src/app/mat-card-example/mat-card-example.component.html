@@ -15,7 +15,7 @@
                   <mat-card>
                   <mat-card-header>
                     <div mat-card class="example-header-image"></div>
-                    <mat-card-title> {{l2Name}} {{index1}} </mat-card-title>
+                    <mat-card-title> {{l2Name}} </mat-card-title>
                   </mat-card-header>
                   <mat-card-content>
                     <div class="row">
@@ -23,10 +23,9 @@
                           <div class="wrapper">
                               <div class="outerMatCard"></div>
                               <mat-icon style="padding-top: 30px;">signal_cellular_alt</mat-icon>
-                              <div class="innerMatCard"> {{l3Name}} {{index2}}</div>
+                              <div class="innerMatCard"> {{l3Name}}</div>
                           </div>
                       </div>
-                      <div [ngClass]="{'col-md-3' : (index1 == 0 && index2 == 8)}"> rfre </div>
                     </div>
                   </mat-card-content>
                 </mat-card>
