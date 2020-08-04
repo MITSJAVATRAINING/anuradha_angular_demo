@@ -22,7 +22,7 @@ export class MatCardExampleComponent implements OnInit {
         this.capbilityl1Name.push(d.cpbltyL0Nme);
       }
     });
-    //console.log(this.capbilityl1Name);
+    console.log('capbilityl1Name', this.capbilityl1Name);
 
     this.capbilityl1Name.forEach((l1Name) => {
       let l2Names = [];
@@ -33,7 +33,8 @@ export class MatCardExampleComponent implements OnInit {
       });
       this.capbilityl1l2Name.set(l1Name, l2Names);
     });
-    //console.log(this.capbilityl1l2Name);
+
+    console.log('capbilityl1l2Name', this.capbilityl1l2Name);
 
     this.capbilityl1Name.forEach((l1Name) => {
       
@@ -47,7 +48,7 @@ export class MatCardExampleComponent implements OnInit {
         this.capbilityl2l3Name.set(l2Name, l3Names);
       });
     });
-    console.log( this.capbilityl2l3Name);
+    console.log('capbilityl2l3Name', this.capbilityl2l3Name);
     
   }
 

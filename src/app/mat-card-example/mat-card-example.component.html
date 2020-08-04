@@ -1,31 +1,53 @@
 <div>
 
-  <div class="row" *ngFor="let row of capbilityl1Name; let index=index" style="padding: 10px;">
+  <div class="row" *ngFor="let row of capbilityl1Name; let i=index" style="padding: 1px;">
     <div class="col-md-12">
-      <mat-card>
+      <mat-card class="outerCard">
+        <div class="outerDiv">
+          <div>  <img class="outerImage" src="assets/Tranche.jpeg"> </div>
+        </div>
         <mat-card-header>
           <div mat-card class="example-header-image"></div>
           <mat-card-title>{{row}} </mat-card-title>
         </mat-card-header>
-        <mat-card-content>
+        <mat-card-content  style="margin-left: 22px;">
           <div class="row">
-            <div  [ngClass]="{'col-md-5' : index1 == 0,  'col-md-3': index1 == 1, 'col-md-4': index1 == 2}" *ngFor="let l2Name of capbilityl1l2Name.get(row);let index1=index">
+           
+            <div  [ngClass]=" i <= 1 ? (index1 == 0 ?'col-md-6':'col-md-3') :  (index1 == 0 || index1 == 2 ?'col-md-4 increasedwidth':'col-md-3') " *ngFor="let l2Name of capbilityl1l2Name.get(row);let index1=index">
+              
               <div>
+               
                 <div>
-                  <mat-card>
-                  <mat-card-header>
+                  <mat-card class="middleCard" style="padding: 6px;height: 188px;">
+                    <div class="middleDiv">
+                      <div>  <img class="middleImage" src="assets/Segment.jpeg"> </div>
+                    </div>
+                    
+                  <mat-card-header style="justify-content: center;">
                     <div mat-card class="example-header-image"></div>
                     <mat-card-title> {{l2Name}} </mat-card-title>
                   </mat-card-header>
-                  <mat-card-content>
+                  <mat-card-content style="margin-left: 22px;" >
                     <div class="row">
-                      <div [ngClass]="{'col-md-3' : index1 == 0,  'col-md-4': index1 == 1, 'col-md-4': index1 == 2}" *ngFor="let l3Name of capbilityl2l3Name.get(l2Name);let index2=index" >
-                          <div class="wrapper">
-                              <div class="outerMatCard"></div>
-                              <mat-icon style="padding-top: 30px;">signal_cellular_alt</mat-icon>
-                              <div class="innerMatCard"> {{l3Name}}</div>
+                      
+                      <div [ngClass]="i < 2 ? (index1 == 0 ? (index2 == 8 ? 'col-md-3 margin-left-25' : 'col-md-3') : ( i == 0 && index1 > 1 && index2 > 1  ? 'col-md-6 margin-left-25' :  (i == 1 && index2 > 3 ?  'col-md-6 margin-left-25' :  'col-md-6'))) : (index1 == 0 || index1 ==2 ? (index1 == 0 && index2 > 5 ? 'col-md-4 margin-left-33' : (index1 == 2 && index2 == 6 ? 'col-md-4 margin-left-20' : 'col-md-4')  ) : index2 > 3 ? 'col-md-6 margin-left-25' : 'col-md-6')" style="padding-top:1em;" 
+                        *ngFor="let l3Name of capbilityl2l3Name.get(l2Name);let index2=index">
+                        
+                        <mat-card class="innerCard" style="padding: 3px;height: 35px;">
+                          <div *ngIf="(i == 1 && index1 == 0 && (index2 == 0 || index2 == 2)); else innerdiv" class="innerDiv1">
+                            <div style="position: absolute;">  <img class="innerImage" src="assets/Capability.JPG"> </div>
                           </div>
+                          <ng-template #innerdiv>
+                            <div class="innerDiv">
+                              <div style="position: absolute;">  <img class="innerImage" src="assets/Capability.JPG"> </div>
+                            </div>
+                          </ng-template>
+                         
+
+                          <div><mat-card-content class="mat-card-content-modify"> {{l3Name}}  </mat-card-content></div>
+                        </mat-card>
                       </div>
+                     
                     </div>
                   </mat-card-content>
                 </mat-card>
@@ -35,14 +57,6 @@
           </div>
         </mat-card-content>
       </mat-card>
-
-    </div>
-    
-  </div>
-
-  <div class="row" style="padding-top: 10px;">
-    <div class="col-md-7">
-     
     </div>
   </div>
 </div>
@@ -73,5 +87,113 @@
     border: solid 1px;
     height: 75px;
     width: 135px;
+  }
+
+  .increasedwidth {
+    flex: 0 0 37.333333% !important;
+    max-width:  37.333333%  !important;
+  }
+
+  .margin-left-25 {
+    margin-left: 25%;
+  }
+
+  .margin-left-33 {
+    margin-left: 33%;
+  }
+
+  .margin-left-20 {
+    margin-left: 20%;
+  }
+
+  .mat-card-content-modify {
+    font-size: 10px;
+    margin-left: 20px;
+  }
+
+  .mat-card-header .mat-card-title {
+    margin-bottom: 0px;
+  }
+
+  .innerImage {
+    vertical-align: middle;
+    border-style: none;
+    width: 20px;
+    margin-top: 5px;
+  }
+
+  .innerDiv {
+    position: absolute;
+    background-color: #dfdf60;
+    height: -15px;
+    width: 22px;
+    height: 100%;
+    margin-left: -3px;
+    margin-top: -3px !important;
+    border-radius: 3px;
+  }
+
+  .innerDiv1 {
+    position: absolute;
+    background-color: #60df6a;
+    height: -15px;
+    width: 22px;
+    height: 100%;
+    margin-left: -3px;
+    margin-top: -3px !important;
+    border-radius: 3px;
+  }
+
+  .middleDiv {
+    position: absolute;
+    background-color: #b8b8b2;
+    height: -15px;
+    width: 22px;
+    height: 100%;
+    margin-left: -6px;
+    margin-top: -6px !important;
+    border-radius: 3px;
+  }
+
+  .middleImage {
+    vertical-align: middle;
+    border-style: none;
+    width: 20px;
+    margin-top: 88px;
+    margin-left: 1px;
+  }
+
+  .innerCard {
+    box-shadow: 1px 2px 1px -1px #dfdf60, 1px 1px 1px 0#dfdf60, 1px 1px 3px 0 #dfdf60;;
+  }
+
+  .middleCard {
+    box-shadow: 0 2px 1px -1px #b8b8b2, 0 1px 1px 0#b8b8b2, 0 1px 3px 0 #b8b8b2;;
+  }
+
+  .outerCard {
+    box-shadow: 0 2px 1px -1px #4b4c86, 0 1px 1px 0#4b4c86, 0 1px 3px -1 #4b4c86;;
+  }
+
+  .outerDiv {
+    position: absolute;
+    background-color: #4b4c86;
+    height: -15px;
+    width: 22px;
+    height: 100%;
+    margin-left: -15px;
+    margin-top: -15px !important;
+    border-radius: 3px;
+  }
+
+  .outerImage {
+    vertical-align: middle;
+    border-style: none;
+    width: 20px;
+    margin-top: 120px;
+    margin-left: 1px;
+  }
+  .mat-card-header .mat-card-title {
+    font-size: 15px !important;
   }
 </style>
