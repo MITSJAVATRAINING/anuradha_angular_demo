@@ -55,4 +55,8 @@ export class MatCardExampleComponent implements OnInit {
   getKeys(map) {
     return Array.from(map.keys());
   }
+
+  getOuterToolTip(row) {
+    return row;
+  }
 }

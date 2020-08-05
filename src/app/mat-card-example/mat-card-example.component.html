@@ -1,14 +1,14 @@
 <div>
 
-  <div class="row" *ngFor="let row of capbilityl1Name; let i=index" style="padding: 1px;">
+  <div class="row" *ngFor="let row of capbilityl1Name; let i=index" style="padding: 15px;">
     <div class="col-md-12">
-      <mat-card class="outerCard">
+      <mat-card class="outerCard" matTooltip=" {{getOuterToolTip(row)}}"  >
         <div class="outerDiv">
           <div>  <img class="outerImage" src="assets/Tranche.jpeg"> </div>
         </div>
         <mat-card-header>
           <div mat-card class="example-header-image"></div>
-          <mat-card-title>{{row}} </mat-card-title>
+          <mat-card-title> <b> {{row}}</b> </mat-card-title>
         </mat-card-header>
         <mat-card-content  style="margin-left: 22px;">
           <div class="row">
@@ -18,14 +18,14 @@
               <div>
                
                 <div>
-                  <mat-card class="middleCard" style="padding: 6px;height: 188px;">
+                  <mat-card class="middleCard" style="padding: 6px;height: 188px;"  matTooltip="Middle card">
                     <div class="middleDiv">
                       <div>  <img class="middleImage" src="assets/Segment.jpeg"> </div>
                     </div>
                     
                   <mat-card-header style="justify-content: center;">
                     <div mat-card class="example-header-image"></div>
-                    <mat-card-title> {{l2Name}} </mat-card-title>
+                    <mat-card-title> <b>{{l2Name}}  </b> </mat-card-title>
                   </mat-card-header>
                   <mat-card-content style="margin-left: 22px;" >
                     <div class="row">
@@ -33,7 +33,7 @@
                       <div [ngClass]="i < 2 ? (index1 == 0 ? (index2 == 8 ? 'col-md-3 margin-left-25' : 'col-md-3') : ( i == 0 && index1 > 1 && index2 > 1  ? 'col-md-6 margin-left-25' :  (i == 1 && index2 > 3 ?  'col-md-6 margin-left-25' :  'col-md-6'))) : (index1 == 0 || index1 ==2 ? (index1 == 0 && index2 > 5 ? 'col-md-4 margin-left-33' : (index1 == 2 && index2 == 6 ? 'col-md-4 margin-left-20' : 'col-md-4')  ) : index2 > 3 ? 'col-md-6 margin-left-25' : 'col-md-6')" style="padding-top:1em;" 
                         *ngFor="let l3Name of capbilityl2l3Name.get(l2Name);let index2=index">
                         
-                        <mat-card class="innerCard" style="padding: 3px;height: 35px;">
+                        <mat-card class="innerCard" style="padding: 3px;height: 35px;"  matTooltip="Inner card">
                           <div *ngIf="(i == 1 && index1 == 0 && (index2 == 0 || index2 == 2)); else innerdiv" class="innerDiv1">
                             <div style="position: absolute;">  <img class="innerImage" src="assets/Capability.JPG"> </div>
                           </div>

@@ -7,7 +7,7 @@ import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { AddDepartmentComponent } from './add-department/add-department.component';
 import { MatCardExampleComponent } from './mat-card-example/mat-card-example.component';
 import { MaterialModule } from './material.module';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +20,8 @@ import { MaterialModule } from './material.module';
     ChartsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
