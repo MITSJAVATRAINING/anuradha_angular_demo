@@ -11,10 +11,11 @@ export class MatCardExampleComponent implements OnInit {
   capbilityl1Name = [];
   capbilityl1l2Name: Map<any, any[]> = new Map<any, any[]>();
   capbilityl2l3Name: Map<any, any[]> = new Map<any, any[]>();
+  defintions: Map<any, any> = new Map<any, any>();
   data = [];
   ngOnInit(): void {
     let data = this.testService.getMatCardData();
-    console.log(data);
+    //console.log(data);
 
     this.data = data;
     this.data.forEach((d) => {
@@ -22,7 +23,7 @@ export class MatCardExampleComponent implements OnInit {
         this.capbilityl1Name.push(d.cpbltyL0Nme);
       }
     });
-    console.log('capbilityl1Name', this.capbilityl1Name);
+  //  console.log('capbilityl1Name', this.capbilityl1Name);
 
     this.capbilityl1Name.forEach((l1Name) => {
       let l2Names = [];
@@ -34,7 +35,7 @@ export class MatCardExampleComponent implements OnInit {
       this.capbilityl1l2Name.set(l1Name, l2Names);
     });
 
-    console.log('capbilityl1l2Name', this.capbilityl1l2Name);
+    //console.log('capbilityl1l2Name', this.capbilityl1l2Name);
 
     this.capbilityl1Name.forEach((l1Name) => {
       
@@ -48,15 +49,36 @@ export class MatCardExampleComponent implements OnInit {
         this.capbilityl2l3Name.set(l2Name, l3Names);
       });
     });
-    console.log('capbilityl2l3Name', this.capbilityl2l3Name);
+  //  console.log('capbilityl2l3Name', this.capbilityl2l3Name);
+
+    let def = this.testService.getMatCardDef();
+    
+    def.forEach(data => {
+    // console.log(data);
+      this.capbilityl1Name.forEach(tranche => {
+        if (tranche == data.tranche) {
+          this.defintions.set(tranche , data.tranchedef);
+        }
+      });
+
+      Array.from(this.capbilityl1l2Name.keys()).forEach(segment => {
+        if (segment = data.segment) {
+          this.defintions.set(segment , data.segmentdef);
+        }
+      });
+
+      Array.from(this.capbilityl2l3Name.keys()).forEach(capability => {
+        if (capability = data.capability) {
+          this.defintions.set(capability , data.capabilitydef);
+        }
+      });
+
+    });
+    console.log(this.defintions);
     
   }
 
   getKeys(map) {
     return Array.from(map.keys());
-  }
-
-  getOuterToolTip(row) {
-    return row;
   }
 }

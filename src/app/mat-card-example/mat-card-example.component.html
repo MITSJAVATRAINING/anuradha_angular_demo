@@ -2,7 +2,7 @@
 
   <div class="row" *ngFor="let row of capbilityl1Name; let i=index" style="padding: 15px;">
     <div class="col-md-12">
-      <mat-card class="outerCard" matTooltip=" {{getOuterToolTip(row)}}"  >
+      <mat-card class="outerCard" #outerTooltip="matTooltip" matTooltip=" {{defintions.get(row)}}"  matTooltipPosition="left"  >
         <div class="outerDiv">
           <div>  <img class="outerImage" src="assets/Tranche.jpeg"> </div>
         </div>
@@ -18,7 +18,7 @@
               <div>
                
                 <div>
-                  <mat-card class="middleCard" style="padding: 6px;height: 188px;"  matTooltip="Middle card">
+                  <mat-card (mouseover)="outerTooltip.hide();" (mouseleave)="outerTooltip.show();" class="middleCard" style="padding: 6px;height: 188px;" #middleTooltip="matTooltip"  matTooltipPosition="left" matTooltip="{{defintions.get(l2Name)}}">
                     <div class="middleDiv">
                       <div>  <img class="middleImage" src="assets/Segment.jpeg"> </div>
                     </div>
@@ -33,7 +33,7 @@
                       <div [ngClass]="i < 2 ? (index1 == 0 ? (index2 == 8 ? 'col-md-3 margin-left-25' : 'col-md-3') : ( i == 0 && index1 > 1 && index2 > 1  ? 'col-md-6 margin-left-25' :  (i == 1 && index2 > 3 ?  'col-md-6 margin-left-25' :  'col-md-6'))) : (index1 == 0 || index1 ==2 ? (index1 == 0 && index2 > 5 ? 'col-md-4 margin-left-33' : (index1 == 2 && index2 == 6 ? 'col-md-4 margin-left-20' : 'col-md-4')  ) : index2 > 3 ? 'col-md-6 margin-left-25' : 'col-md-6')" style="padding-top:1em;" 
                         *ngFor="let l3Name of capbilityl2l3Name.get(l2Name);let index2=index">
                         
-                        <mat-card class="innerCard" style="padding: 3px;height: 35px;"  matTooltip="Inner card">
+                        <mat-card class="innerCard" (mouseover)="middleTooltip.hide();outerTooltip.hide();"  (mouseleave)="middleTooltip.show();outerTooltip.show();" style="padding: 3px;height: 35px;" #innerTooltip="matTooltip" matTooltip="{{defintions.get(l3Name)}}">
                           <div *ngIf="(i == 1 && index1 == 0 && (index2 == 0 || index2 == 2)); else innerdiv" class="innerDiv1">
                             <div style="position: absolute;">  <img class="innerImage" src="assets/Capability.JPG"> </div>
                           </div>
