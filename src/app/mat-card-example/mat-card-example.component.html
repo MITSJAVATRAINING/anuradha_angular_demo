@@ -1,19 +1,48 @@
 <div>
 
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-select [(ngModel)]="l1Name" placeholder="L1 Name" (selectionChange)="onl1NameChange()">
+          <mat-option [value]="undefined"> </mat-option>
+          <mat-option *ngFor="let row of capbilityl1Name" [value]="row">
+            {{row}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <mat-select [(ngModel)]="l2Name" placeholder="L2 Name">
+          <mat-option [value]="undefined"> </mat-option>
+          <mat-option *ngFor="let row of capbilityl2Name" [value]="row">
+            {{row}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-3">
+      <mat-form-field>
+        <input type="text" (input)="onChangel3Name()" matInput [(ngModel)]="l3Name" placeholder="L3 Name">
+      </mat-form-field>
+    </div>
+  </div>
+  
   <div class="row" *ngFor="let row of capbilityl1Name; let i=index" style="padding: 15px;">
-    <div class="col-md-12">
+    <div class="col-md-12" *ngIf="(l1Name == undefined || l1Name == row) && getl1l2Keys(row).length > 0">
       <mat-card class="outerCard" #outerTooltip="matTooltip" matTooltip=" {{defintions.get(row)}}"  matTooltipPosition="left"  >
         <div class="outerDiv">
           <div>  <img class="outerImage" src="assets/Tranche.jpeg"> </div>
         </div>
-        <mat-card-header>
+        <mat-card-header> 
           <div mat-card class="example-header-image"></div>
           <mat-card-title> <b> {{row}}</b> </mat-card-title>
         </mat-card-header>
         <mat-card-content  style="margin-left: 22px;">
           <div class="row">
            
-            <div  [ngClass]=" i <= 1 ? (index1 == 0 ?'col-md-6':'col-md-3') :  (index1 == 0 || index1 == 2 ?'col-md-4 increasedwidth':'col-md-3') " *ngFor="let l2Name of capbilityl1l2Name.get(row);let index1=index">
+            <div [ngClass]="getClassMiddleCard(row,l1l2Name)" *ngFor="let l1l2Name of getl1l2Keys(row);"  >
               
               <div>
                
@@ -25,15 +54,15 @@
                     
                   <mat-card-header style="justify-content: center;">
                     <div mat-card class="example-header-image"></div>
-                    <mat-card-title> <b>{{l2Name}}  </b> </mat-card-title>
+                    <mat-card-title> <b>{{l1l2Name}}  </b> </mat-card-title>
                   </mat-card-header>
                   <mat-card-content style="margin-left: 22px;" >
                     <div class="row">
                       
-                      <div [ngClass]="i < 2 ? (index1 == 0 ? (index2 == 8 ? 'col-md-3 margin-left-25' : 'col-md-3') : ( i == 0 && index1 > 1 && index2 > 1  ? 'col-md-6 margin-left-25' :  (i == 1 && index2 > 3 ?  'col-md-6 margin-left-25' :  'col-md-6'))) : (index1 == 0 || index1 ==2 ? (index1 == 0 && index2 > 5 ? 'col-md-4 margin-left-33' : (index1 == 2 && index2 == 6 ? 'col-md-4 margin-left-20' : 'col-md-4')  ) : index2 > 3 ? 'col-md-6 margin-left-25' : 'col-md-6')" style="padding-top:1em;" 
-                        *ngFor="let l3Name of capbilityl2l3Name.get(l2Name);let index2=index">
+                      <div style="padding-top:1em;"  [ngClass]="getClassInnerCard(row,l1l2Name,l3Name)"
+                        *ngFor="let l3Name of capbilityl2l3Name.get(l1l2Name);let index2=index">
                         
-                        <mat-card class="innerCard" (mouseover)="middleTooltip.hide();outerTooltip.hide();"  (mouseleave)="middleTooltip.show();outerTooltip.show();" style="padding: 3px;height: 35px;" #innerTooltip="matTooltip" matTooltip="{{defintions.get(l3Name)}}">
+                        <mat-card  class="innerCard" (mouseover)="middleTooltip.hide();outerTooltip.hide();"  (mouseleave)="middleTooltip.show();outerTooltip.show();" style="padding: 3px;height: 35px;" #innerTooltip="matTooltip" matTooltip="{{defintions.get(l3Name)}}">
                           <div *ngIf="(i == 1 && index1 == 0 && (index2 == 0 || index2 == 2)); else innerdiv" class="innerDiv1">
                             <div style="position: absolute;">  <img class="innerImage" src="assets/Capability.JPG"> </div>
                           </div>
@@ -49,6 +78,7 @@
                       </div>
                      
                     </div>
+					
                   </mat-card-content>
                 </mat-card>
                 </div>

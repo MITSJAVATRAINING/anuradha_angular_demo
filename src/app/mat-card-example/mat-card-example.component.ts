@@ -13,72 +13,189 @@ export class MatCardExampleComponent implements OnInit {
   capbilityl2l3Name: Map<any, any[]> = new Map<any, any[]>();
   defintions: Map<any, any> = new Map<any, any>();
   data = [];
+  l1Name: any;
+  l2Name: any;
+  l3Name: any;
+  capbilityl2Name = [];
   ngOnInit(): void {
     let data = this.testService.getMatCardData();
     //console.log(data);
 
     this.data = data;
-    this.data.forEach((d) => {
+    
+    //  console.log('capbilityl1Name', this.capbilityl1Name);
+
+    
+   this.onChangel3Name();
+
+   this.populateDefintions();
+  }
+
+  populateDefintions() {
+    let def = this.testService.getMatCardDef();
+
+    def.forEach((data) => {
+      // console.log(data);
+      this.capbilityl1Name.forEach((tranche) => {
+        if (tranche == data.tranche) {
+          this.defintions.set(tranche, data.tranchedef);
+        }
+      });
+
+      Array.from(this.capbilityl1l2Name.keys()).forEach((segment) => {
+        if ((segment = data.segment)) {
+          this.defintions.set(segment, data.segmentdef);
+        }
+      });
+
+      Array.from(this.capbilityl2l3Name.keys()).forEach((capability) => {
+        if ((capability = data.capability)) {
+          this.defintions.set(capability, data.capabilitydef);
+        }
+      });
+    });
+  }
+
+  getKeys(map) {
+    return Array.from(map.keys());
+  }
+
+  getl1l2Keys(l1name) {
+    if (this.l2Name == undefined) {
+      return this.capbilityl1l2Name.get(l1name);
+    } else {
+      return this.capbilityl1l2Name
+        .get(l1name)
+        .filter((itm) => itm == this.l2Name);
+    }
+  }
+
+  onl1NameChange() {
+    this.l2Name = undefined;
+    if (this.l1Name == undefined) {
+      this.capbilityl2Name = Array.from(this.capbilityl2l3Name.keys());
+    } else {
+      this.capbilityl2Name = this.capbilityl1l2Name.get(this.l1Name);
+    }
+  }
+
+  getClassMiddleCard(l1Name, l2Name) {
+    if (this.l2Name || this.capbilityl1l2Name.get(l1Name).length == 1) {
+      return 'col-md-12';
+    }
+
+    if (this.capbilityl1l2Name.get(l1Name).length == 2) {
+      return 'col-md-6';
+    }
+
+
+    let className = 'col-md-3';
+    const length = this.capbilityl2l3Name.get(l2Name).length;
+  
+    
+
+    if (l1Name == 'Enabling & Supporting') {
+      if (this.capbilityl1l2Name.get(l1Name)[0] == l2Name || this.capbilityl1l2Name.get(l1Name)[2] == l2Name) {
+        return 'col-md-4 increasedwidth';
+      }
+
+      if (length > 6) {
+        className = 'col-md-4 increasedwidth';
+      }
+    } else {
+      if (this.capbilityl1l2Name.get(l1Name)[0] == l2Name) {
+        return 'col-md-6';
+      }
+      if (length > 6) {
+        className = 'col-md-6';
+      }
+    }
+    return className;
+  }
+
+  getClassInnerCard(l1Name, l2Name, l3Name) {
+
+    if (this.capbilityl2l3Name.get(l2Name).length == 1) {
+      return 'col-md-12';
+    }
+    if (this.capbilityl2l3Name.get(l2Name).length == 2) {
+      return 'col-md-6';
+    }
+    let className = 'col-md-6';
+    let l3Values = this.capbilityl2l3Name.get(l2Name);
+    const length = l3Values.length;
+    if (l1Name == 'Enabling & Supporting') {
+      if (length <= 6 && l3Name == l3Values[length - 1] && length % 2 != 0) {
+        className = 'margin-left-25 col-md-6';
+      }
+      if (length > 6) {
+        if (
+          l3Name == l3Values[length - 2] &&
+          length % 2 == 0 &&
+          length % 3 != 0
+        ) {
+          className = 'col-md-4 margin-left-20';
+        } else if (
+          l3Name == l3Values[length - 1] &&
+          length % 2 != 0 &&
+          length % 3 != 0
+        ) {
+          className = 'col-md-4 margin-left-33';
+        } else {
+          className = 'col-md-4';
+        }
+      }
+    } else {
+      if (l3Name == l3Values[length - 1] && length % 2 != 0) {
+        className = 'margin-left-25 col-md-6';
+      } else if (length > 6) {
+        if (l3Name == l3Values[length - 2] && length % 4 != 0) {
+          className = 'col-md-3 margin-left-25';
+        } else {
+          className = 'col-md-3';
+        }
+      }
+    }
+
+    return className;
+  }
+
+  onChangel3Name() {
+
+    if (this.l3Name == undefined || this.l3Name.trim() == '') { 
+     this.populateData(this.data)
+    } else {
+      this.populateData(this.data.filter(itm => itm.cpbltyL2Nme.includes(this.l3Name)));
+    }
+  }
+
+  populateData(data) {
+    data.forEach((d) => {
       if (this.capbilityl1Name.indexOf(d.cpbltyL0Nme) <= -1) {
         this.capbilityl1Name.push(d.cpbltyL0Nme);
       }
     });
-  //  console.log('capbilityl1Name', this.capbilityl1Name);
-
     this.capbilityl1Name.forEach((l1Name) => {
       let l2Names = [];
-      this.data.forEach((d) =>{
+      data.forEach((d) => {
         if (l2Names.indexOf(d.cpbltyL1Nme) <= -1 && d.cpbltyL0Nme == l1Name) {
           l2Names.push(d.cpbltyL1Nme);
         }
       });
       this.capbilityl1l2Name.set(l1Name, l2Names);
     });
-
-    //console.log('capbilityl1l2Name', this.capbilityl1l2Name);
-
     this.capbilityl1Name.forEach((l1Name) => {
-      
-      this.capbilityl1l2Name.get(l1Name).forEach(l2Name => {
+      this.capbilityl1l2Name.get(l1Name).forEach((l2Name) => {
         let l3Names = [];
-        this.data.forEach((d) =>{
+        data.forEach((d) => {
           if (l3Names.indexOf(d.cpbltyL2Nme) <= -1 && d.cpbltyL1Nme == l2Name) {
-            l3Names.push(d.cpbltyL2Nme);
+              l3Names.push(d.cpbltyL2Nme);
           }
         });
         this.capbilityl2l3Name.set(l2Name, l3Names);
+        this.capbilityl2Name = Array.from(this.capbilityl2l3Name.keys());
       });
     });
-  //  console.log('capbilityl2l3Name', this.capbilityl2l3Name);
-
-    let def = this.testService.getMatCardDef();
     
-    def.forEach(data => {
-    // console.log(data);
-      this.capbilityl1Name.forEach(tranche => {
-        if (tranche == data.tranche) {
-          this.defintions.set(tranche , data.tranchedef);
-        }
-      });
-
-      Array.from(this.capbilityl1l2Name.keys()).forEach(segment => {
-        if (segment = data.segment) {
-          this.defintions.set(segment , data.segmentdef);
-        }
-      });
-
-      Array.from(this.capbilityl2l3Name.keys()).forEach(capability => {
-        if (capability = data.capability) {
-          this.defintions.set(capability , data.capabilitydef);
-        }
-      });
-
-    });
-    console.log(this.defintions);
-    
-  }
-
-  getKeys(map) {
-    return Array.from(map.keys());
   }
 }
