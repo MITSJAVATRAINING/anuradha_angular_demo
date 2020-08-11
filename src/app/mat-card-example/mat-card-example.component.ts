@@ -82,9 +82,6 @@ export class MatCardExampleComponent implements OnInit {
   }
 
   getClassMiddleCard(l1Name, l2Name) {
-
-    console.log('Inside getClassMiddle Card', this.l2Name);
-
     let className = 'col-md-3';
     const length = this.capbilityl2l3Name.get(l2Name).length;
     
@@ -101,19 +98,47 @@ export class MatCardExampleComponent implements OnInit {
     if (this.l2Name != 'All' && this.l2Name != l2Name) {
       className = className + ' disable-mat-card';
     }
-      
+    if (this.isMatCardDisable(l1Name, l2Name) && !className.includes('disable-mat-card')) {
+      className = className + ' disable-mat-card';
+    }
     return className;
     
   }
 
+  isMatCardDisable(l1Name, l2Name) {
+    let isDisabled = false;
+    if(this.l3Name != '') {
+      Array.from(this.capbilityl1l2Name.keys()).forEach(tranche => {
+        let trancheCount = 0;
+        let segments = this.capbilityl1l2Name.get(tranche);
+        segments.forEach(seg => {
+          let segCount = 0;
+          this.capbilityl2l3Name.get(seg).forEach(cap => {
+            if (cap.includes(this.l3Name)) {
+              segCount++;
+              trancheCount++;
+            }
+          });
+          if (segCount == 0 && seg == l2Name) {
+              isDisabled =  true;
+          }
+        })
+        if (trancheCount == 0 && tranche == l1Name){
+          isDisabled = true;
+        }
+      });
+    }
+
+    if (this.l2Name != 'All') {
+      if (this.capbilityl1l2Name.get(l1Name).indexOf(this.l2Name) <= -1) {
+        isDisabled = true;
+      }
+    }
+    return isDisabled;
+  }
+
   getClassInnerCard(l1Name, l2Name, l3Name) {
     let className = 'col-md-6';
-    if (this.capbilityl2l3Name.get(l2Name).length == 1) {
-      className = 'col-md-12';
-    }
-    if (this.capbilityl2l3Name.get(l2Name).length == 2) {
-      className = 'col-md-6';
-    }
     
     let l3Values = this.capbilityl2l3Name.get(l2Name);
     const length = l3Values.length;

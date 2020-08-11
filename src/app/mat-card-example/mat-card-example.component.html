@@ -24,13 +24,13 @@
     </div>
     <div class="col-md-3">
       <mat-form-field>
-        <input type="text" (input)="onChangel3Name()" matInput [(ngModel)]="l3Name" placeholder="L3 Name">
+        <input type="text"  matInput [(ngModel)]="l3Name" placeholder="L3 Name">
       </mat-form-field>
     </div>
   </div>
   
   <div class="row" *ngFor="let row of capbilityl1Name; let i=index" style="padding: 15px;">
-    <div class="col-md-12" [ngClass] = "(l1Name == 'All' || l1Name == row) ? 'col-md-12' : 'col-md-12 disable-mat-card'">
+    <div class="col-md-12" [ngClass] = "((l1Name == 'All' || l1Name == row) && !isMatCardDisable(row, '')) ? 'col-md-12' : 'col-md-12 disable-mat-card'">
       <mat-card class="outerCard" #outerTooltip="matTooltip" matTooltip=" {{defintions.get(row)}}"  matTooltipPosition="left"  >
         <div class="outerDiv">
           <div>  <img class="outerImage" src="assets/Tranche.jpeg"> </div>
