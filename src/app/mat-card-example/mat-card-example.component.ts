@@ -13,9 +13,9 @@ export class MatCardExampleComponent implements OnInit {
   capbilityl2l3Name: Map<any, any[]> = new Map<any, any[]>();
   defintions: Map<any, any> = new Map<any, any>();
   data = [];
-  l1Name: any;
-  l2Name: any;
-  l3Name: any;
+  l1Name: any = 'All';
+  l2Name: any = 'All';
+  l3Name: any = '';
   capbilityl2Name = [];
   ngOnInit(): void {
     let data = this.testService.getMatCardData();
@@ -26,7 +26,7 @@ export class MatCardExampleComponent implements OnInit {
     //  console.log('capbilityl1Name', this.capbilityl1Name);
 
     
-   this.onChangel3Name();
+   this.populateData(this.data);
 
    this.populateDefintions();
   }
@@ -61,18 +61,20 @@ export class MatCardExampleComponent implements OnInit {
   }
 
   getl1l2Keys(l1name) {
-    if (this.l2Name == undefined) {
-      return this.capbilityl1l2Name.get(l1name);
-    } else {
-      return this.capbilityl1l2Name
-        .get(l1name)
-        .filter((itm) => itm == this.l2Name);
-    }
+    // if (this.l2Name == undefined) {
+    //   return this.capbilityl1l2Name.get(l1name);
+    // } else {
+    //   return this.capbilityl1l2Name
+    //     .get(l1name)
+    //     .filter((itm) => itm == this.l2Name);
+    // }
+
+    return this.capbilityl1l2Name.get(l1name);
   }
 
   onl1NameChange() {
-    this.l2Name = undefined;
-    if (this.l1Name == undefined) {
+    this.l2Name = 'All';
+    if (this.l1Name == 'All') {
       this.capbilityl2Name = Array.from(this.capbilityl2l3Name.keys());
     } else {
       this.capbilityl2Name = this.capbilityl1l2Name.get(this.l1Name);
@@ -80,48 +82,39 @@ export class MatCardExampleComponent implements OnInit {
   }
 
   getClassMiddleCard(l1Name, l2Name) {
-    if (this.l2Name || this.capbilityl1l2Name.get(l1Name).length == 1) {
-      return 'col-md-12';
-    }
 
-    if (this.capbilityl1l2Name.get(l1Name).length == 2) {
-      return 'col-md-6';
-    }
-
+    console.log('Inside getClassMiddle Card', this.l2Name);
 
     let className = 'col-md-3';
     const length = this.capbilityl2l3Name.get(l2Name).length;
-  
     
 
     if (l1Name == 'Enabling & Supporting') {
-      if (this.capbilityl1l2Name.get(l1Name)[0] == l2Name || this.capbilityl1l2Name.get(l1Name)[2] == l2Name) {
-        return 'col-md-4 increasedwidth';
-      }
-
       if (length > 6) {
         className = 'col-md-4 increasedwidth';
       }
     } else {
-      if (this.capbilityl1l2Name.get(l1Name)[0] == l2Name) {
-        return 'col-md-6';
-      }
       if (length > 6) {
         className = 'col-md-6';
       }
     }
+    if (this.l2Name != 'All' && this.l2Name != l2Name) {
+      className = className + ' disable-mat-card';
+    }
+      
     return className;
+    
   }
 
   getClassInnerCard(l1Name, l2Name, l3Name) {
-
+    let className = 'col-md-6';
     if (this.capbilityl2l3Name.get(l2Name).length == 1) {
-      return 'col-md-12';
+      className = 'col-md-12';
     }
     if (this.capbilityl2l3Name.get(l2Name).length == 2) {
-      return 'col-md-6';
+      className = 'col-md-6';
     }
-    let className = 'col-md-6';
+    
     let l3Values = this.capbilityl2l3Name.get(l2Name);
     const length = l3Values.length;
     if (l1Name == 'Enabling & Supporting') {
@@ -156,17 +149,10 @@ export class MatCardExampleComponent implements OnInit {
         }
       }
     }
-
-    return className;
-  }
-
-  onChangel3Name() {
-
-    if (this.l3Name == undefined || this.l3Name.trim() == '') { 
-     this.populateData(this.data)
-    } else {
-      this.populateData(this.data.filter(itm => itm.cpbltyL2Nme.includes(this.l3Name)));
+    if (l3Name.includes(this.l3Name) || this.l3Name == '') {
+      return className
     }
+    return className + ' disable-mat-card';
   }
 
   populateData(data) {

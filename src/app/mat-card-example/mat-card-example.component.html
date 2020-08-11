@@ -5,7 +5,7 @@
     <div class="col-md-3">
       <mat-form-field>
         <mat-select [(ngModel)]="l1Name" placeholder="L1 Name" (selectionChange)="onl1NameChange()">
-          <mat-option [value]="undefined"> </mat-option>
+          <mat-option [value]="'All'"> All </mat-option>
           <mat-option *ngFor="let row of capbilityl1Name" [value]="row">
             {{row}}
           </mat-option>
@@ -15,7 +15,7 @@
     <div class="col-md-3">
       <mat-form-field>
         <mat-select [(ngModel)]="l2Name" placeholder="L2 Name">
-          <mat-option [value]="undefined"> </mat-option>
+          <mat-option [value]="'All'"> All </mat-option>
           <mat-option *ngFor="let row of capbilityl2Name" [value]="row">
             {{row}}
           </mat-option>
@@ -30,7 +30,7 @@
   </div>
   
   <div class="row" *ngFor="let row of capbilityl1Name; let i=index" style="padding: 15px;">
-    <div class="col-md-12" *ngIf="(l1Name == undefined || l1Name == row) && getl1l2Keys(row).length > 0">
+    <div class="col-md-12" [ngClass] = "(l1Name == 'All' || l1Name == row) ? 'col-md-12' : 'col-md-12 disable-mat-card'">
       <mat-card class="outerCard" #outerTooltip="matTooltip" matTooltip=" {{defintions.get(row)}}"  matTooltipPosition="left"  >
         <div class="outerDiv">
           <div>  <img class="outerImage" src="assets/Tranche.jpeg"> </div>
@@ -47,7 +47,7 @@
               <div>
                
                 <div>
-                  <mat-card (mouseover)="outerTooltip.hide();" (mouseleave)="outerTooltip.show();" class="middleCard" style="padding: 6px;height: 188px;" #middleTooltip="matTooltip"  matTooltipPosition="left" matTooltip="{{defintions.get(l2Name)}}">
+                  <mat-card (mouseover)="outerTooltip.hide();" (mouseleave)="outerTooltip.show();" class="middleCard" style="padding: 6px;height: 188px;" #middleTooltip="matTooltip"  matTooltipPosition="left" matTooltip="{{defintions.get(l1l2Name)}}">
                     <div class="middleDiv">
                       <div>  <img class="middleImage" src="assets/Segment.jpeg"> </div>
                     </div>
@@ -223,7 +223,14 @@
     margin-top: 120px;
     margin-left: 1px;
   }
+
   .mat-card-header .mat-card-title {
     font-size: 15px !important;
   }
+
+  .disable-mat-card {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
 </style>
