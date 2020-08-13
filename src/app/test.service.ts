@@ -24,6 +24,17 @@ export class TestService {
     this.employeeName.next(employeeName);
   }
 
+  public getFilteredData() {
+    let json = [
+        {"cpbltyL0Nme":"Customers & Markets","cpbltyL1Nme":"Strategic Outlook","cpbltyL2Nme":"Environmental, Social & Governance Investing"},
+        {"cpbltyL0Nme":"Journeys & Core","cpbltyL1Nme":"Loans & Properties","cpbltyL2Nme":"Custodial Services"},
+        {"cpbltyL0Nme":"Journeys & Core","cpbltyL1Nme":"Shared","cpbltyL2Nme":"Delivery Settlement"},
+        {"cpbltyL0Nme":"Journeys & Core","cpbltyL1Nme":"Shared","cpbltyL2Nme":"Pipeline Management"}
+    ];
+    return json;
+  }
+
+
   public getMatCardData() {
     let json  = [{"cpbltyL0Nme":"Customers & Markets","cpbltyL1Nme":"Strategic Outlook","cpbltyL2Nme":"Strategy Management"},
     {"cpbltyL0Nme":"Customers & Markets","cpbltyL1Nme":"Strategic Outlook","cpbltyL2Nme":"Environmental, Social & Governance Investing"},

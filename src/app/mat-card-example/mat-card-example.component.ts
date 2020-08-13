@@ -101,6 +101,19 @@ export class MatCardExampleComponent implements OnInit {
     if (this.isMatCardDisable(l1Name, l2Name) && !className.includes('disable-mat-card')) {
       className = className + ' disable-mat-card';
     }
+
+    if (this.getFilteredData().length > 0) {
+      let count = 0;
+      this.getFilteredData().forEach(filterD => {
+        if (filterD.cpbltyL1Nme == l2Name) {
+          count++;
+        }
+      });
+      if (count == 0 && !className.includes('disable-mat-card')) {
+        className = className + ' disable-mat-card';
+      }
+    }
+
     return className;
     
   }
@@ -114,7 +127,7 @@ export class MatCardExampleComponent implements OnInit {
         segments.forEach(seg => {
           let segCount = 0;
           this.capbilityl2l3Name.get(seg).forEach(cap => {
-            if (cap.includes(this.l3Name)) {
+            if (cap.toLowerCase().includes(this.l3Name.toLowerCase())) {
               segCount++;
               trancheCount++;
             }
@@ -134,6 +147,19 @@ export class MatCardExampleComponent implements OnInit {
         isDisabled = true;
       }
     }
+
+    if (this.getFilteredData().length > 0) {
+      let count = 0;
+      this.getFilteredData().forEach(filterD => {
+        if (filterD.cpbltyL0Nme == l1Name) {
+          count++;
+        }
+      });
+      if (count == 0) {
+       isDisabled = true;
+      }
+    }
+
     return isDisabled;
   }
 
@@ -174,10 +200,32 @@ export class MatCardExampleComponent implements OnInit {
         }
       }
     }
-    if (l3Name.includes(this.l3Name) || this.l3Name == '') {
+
+    if (this.getFilteredData().length > 0) {
+      let count = 0;
+      this.getFilteredData().forEach(filterD => {
+        if (filterD.cpbltyL2Nme == l3Name) {
+          count++;
+        }
+      });
+      if (count == 0 && !className.includes('disable-mat-card')) {
+        className = className + ' disable-mat-card';
+        return className;
+      }
+    }
+
+    if (l3Name.toLowerCase().includes(this.l3Name.toLowerCase()) || this.l3Name == '') {
       return className
     }
+
+
+
     return className + ' disable-mat-card';
+  }
+  
+
+  getFilteredData() {
+    return this.testService.getFilteredData();
   }
 
   populateData(data) {
