@@ -23,13 +23,74 @@ export class TestService {
   public setEmployeeName(employeeName: string): any {
     this.employeeName.next(employeeName);
   }
+  
+  public getAwsEnablers() {
+    let json = [{ "id": 1,
+    "awsEnabler": "Enterprise API Gateway (Apigee)"
+  },
+  { "id": 2,
+    "awsEnabler": "EDL (Hydration & Vending)"
+ },
+ { "id": 3,
+    "awsEnabler": "B2B Gateway (for cloud resources)"
+  },
+  { "id": 4,
+    "awsEnabler": "Service Mesh (App Mesh)"
+ },
+ { "id": 5,
+    "awsEnabler": "IaaC (Terraform,CloudFormation)"
+  },
+  { "id": 6,
+    "awsEnabler": "Containers"
+ },
+ { "id": 7,
+    "awsEnabler": "Global DB (Aurora)"
+  },
+  { "id": 8,
+    "awsEnabler": "Workflow (Airflow)"
+ },
+  { "id": 9,
+    "awsEnabler": "Cloud Reporting (AWS QuickSight, Tableau)"
+ },
+ { "id": 10,
+    "awsEnabler": "Auto ML (DataRobot, H20)"
+  },
+  { "id": 11,
+    "awsEnabler": "GraphQL for APIs"
+ },
+  { "id": 12,
+    "awsEnabler": "Data Streaming (Kinesis, Kafka, ESB)"
+ },
+ { "id": 13,
+    "awsEnabler": "Text Extraction and OCR (AWS Textract)"
+  },
+  { "id": 14,
+    "awsEnabler": "MailHub"
+ },
+  { "id": 15,
+    "awsEnabler": "GraphDB (Neptune & Neo4j)"
+ },
+ { "id": 16,
+    "awsEnabler": "Windows EC2"
+  },
+  { "id": 17,
+    "awsEnabler": "SQL Server EC2"
+ },
+  { "id": 18,
+    "awsEnabler": "MQ"
+ },
+ { "id": 19,
+    "awsEnabler": "Web Sockets"
+  },
+  { "id": 20,
+    "awsEnabler": "IDMZ"
+ }];
+ 
+ return json;
+  }
 
   public getFilteredData() {
     let json = [
-        {"cpbltyL0Nme":"Customers & Markets","cpbltyL1Nme":"Strategic Outlook","cpbltyL2Nme":"Environmental, Social & Governance Investing"},
-        {"cpbltyL0Nme":"Journeys & Core","cpbltyL1Nme":"Loans & Properties","cpbltyL2Nme":"Custodial Services"},
-        {"cpbltyL0Nme":"Journeys & Core","cpbltyL1Nme":"Shared","cpbltyL2Nme":"Delivery Settlement"},
-        {"cpbltyL0Nme":"Journeys & Core","cpbltyL1Nme":"Shared","cpbltyL2Nme":"Pipeline Management"}
     ];
     return json;
   }

@@ -1,0 +1,37 @@
+<div>
+  <div class="row margin">
+    <div class="col-md-6" *ngFor="let aws of awsEnablers">
+      <div class="row">
+        <div class="col-md-7">
+          <mat-checkbox [(ngModel)]="aws.IsChecked">
+            {{ aws.awsEnabler }}
+          </mat-checkbox>
+        </div>
+        <div class="col-md-5">
+          <mat-select
+            *ngIf="aws.IsChecked"
+            [(ngModel)]="aws.score"
+            placeholder="Score"
+          >
+            <mat-option *ngFor="let score of scores" [value]="score">
+              {{ score }}
+            </mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row margin">
+    <div class="col-md-11"></div>
+    <div class="col-md-1">
+      <button class="btn btn-success" (click)="onSave()">Save</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .margin {
+    margin: 10px;
+  }
+</style>

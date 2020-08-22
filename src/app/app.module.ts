@@ -8,12 +8,14 @@ import { AddDepartmentComponent } from './add-department/add-department.componen
 import { MatCardExampleComponent } from './mat-card-example/mat-card-example.component';
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AwsEnablersComponent } from './aws-enablers/aws-enablers.component';
 @NgModule({
   declarations: [
     AppComponent,
     AddEmployeeComponent,
     AddDepartmentComponent,
-    MatCardExampleComponent
+    MatCardExampleComponent,
+    AwsEnablersComponent
   ],
   imports: [
     BrowserModule,

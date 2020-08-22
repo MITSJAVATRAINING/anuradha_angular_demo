@@ -1,8 +1,7 @@
 <div>
 
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-3">
+    <div class="col-md-1 margin-left-header">
       <mat-form-field>
         <mat-select [(ngModel)]="l1Name" placeholder="L1 Name" (selectionChange)="onl1NameChange()">
           <mat-option [value]="'All'"> All </mat-option>
@@ -12,7 +11,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-1 margin-left-header">
       <mat-form-field>
         <mat-select [(ngModel)]="l2Name" placeholder="L2 Name">
           <mat-option [value]="'All'"> All </mat-option>
@@ -22,10 +21,53 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-1 margin-left-header">
       <mat-form-field>
         <input type="text"  matInput [(ngModel)]="l3Name" placeholder="L3 Name">
       </mat-form-field>
+    </div>
+    <div class="col-md-1 margin-left-header">
+      <mat-form-field>
+        <mat-select [(ngModel)]="l2Name" placeholder="L2 Name">
+          <mat-option [value]="'All'"> All </mat-option>
+          <mat-option *ngFor="let row of capbilityl2Name" [value]="row">
+            {{row}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-1 margin-left-header">
+      <mat-form-field>
+        <mat-select [(ngModel)]="l2Name" placeholder="L2 Name">
+          <mat-option [value]="'All'"> All </mat-option>
+          <mat-option *ngFor="let row of capbilityl2Name" [value]="row">
+            {{row}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-1 margin-left-header">
+      <mat-form-field>
+        <mat-select [(ngModel)]="l2Name" placeholder="L2 Name">
+          <mat-option [value]="'All'"> All </mat-option>
+          <mat-option *ngFor="let row of capbilityl2Name" [value]="row">
+            {{row}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-1 margin-left-header">
+      <mat-form-field>
+        <mat-select [(ngModel)]="l2Name" placeholder="L2 Name">
+          <mat-option [value]="'All'"> All </mat-option>
+          <mat-option *ngFor="let row of capbilityl2Name" [value]="row">
+            {{row}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-md-1 margin-left-header">
+      <button class="btn btn-success">DownLoad</button>
     </div>
   </div>
   
@@ -37,7 +79,7 @@
         </div>
         <mat-card-header> 
           <div mat-card class="example-header-image"></div>
-          <mat-card-title> <b> {{row}}</b> </mat-card-title>
+          <mat-card-title class="mat-card-title-font-outer"> <b> {{row}}</b> </mat-card-title>
         </mat-card-header>
         <mat-card-content  style="margin-left: 22px;">
           <div class="row">
@@ -92,19 +134,7 @@
 </div>
 
 <style>
-  .innerMatCard {
-    position: relative;
-    margin-left: 26px;
-    margin-top: -31px;
-    font-size: 10px;
-  }
 
-  .outerMatCard {
-    display: inline-block;
-    border: 12px solid #ffc107d6;
-    height: 73px;
-    position: absolute;
-  }
 
   .outerl1MatCard {
     display: inline-block;
@@ -137,7 +167,7 @@
   }
 
   .mat-card-content-modify {
-    font-size: 10px;
+    font-size: 11px;
     margin-left: 20px;
   }
 
@@ -224,13 +254,27 @@
     margin-left: 1px;
   }
 
-  .mat-card-header .mat-card-title {
+  /* .mat-card-header .mat-card-title {
     font-size: 15px !important;
-  }
+  } */
 
   .disable-mat-card {
     opacity: 0.7;
     pointer-events: none;
   }
+
+.mat-card-title-font-outer {
+  font-size: 18px;
+  font-weight: normal
+}
+
+.mat-card-title-font-middle {
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.margin-left-header {
+  margin-left: 61px;
+}
 
 </style>
