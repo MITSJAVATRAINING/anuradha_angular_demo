@@ -9,13 +9,15 @@ import { MatCardExampleComponent } from './mat-card-example/mat-card-example.com
 import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AwsEnablersComponent } from './aws-enablers/aws-enablers.component';
+import { EmpModalComponent } from './emp-modal/emp-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
     AddEmployeeComponent,
     AddDepartmentComponent,
     MatCardExampleComponent,
-    AwsEnablersComponent
+    AwsEnablersComponent,
+    EmpModalComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,9 @@ import { AwsEnablersComponent } from './aws-enablers/aws-enablers.component';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    EmpModalComponent
+  ]
 })
 export class AppModule { }
