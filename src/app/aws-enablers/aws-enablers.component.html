@@ -1,9 +1,17 @@
 
 
 
+<mat-tab-group (selectedTabChange)="onTabChange($event)">
+  <mat-tab label="First"> 
+  <app-tab-one #tabOne></app-tab-one>  
+  </mat-tab>
+  <mat-tab label="Second">
+    <app-tab-two></app-tab-two>    
+  </mat-tab>
+</mat-tab-group>
 
 
-<button class="btn btn-success" (click)="openPopUp()">Open PopUp</button>
+<!-- <button class="btn btn-success" (click)="openPopUp()">Open PopUp</button> -->
 
 <!-- <div>
   <div class="row margin">

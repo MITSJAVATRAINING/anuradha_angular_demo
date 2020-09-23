@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TestService } from '../test.service';
 import { AWSEnabler } from '../generic.interface';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EmpModalComponent } from '../emp-modal/emp-modal.component';
+import { TabOneComponent } from '../tab-one/tab-one.component';
 
 @Component({
   selector: 'app-aws-enablers',
@@ -55,6 +56,13 @@ export class AwsEnablersComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       console.log('here');
     });
+  }
+
+  @ViewChild('tabOne') tabOne: TabOneComponent;
+
+  onTabChange(event) {
+    console.log(event);
+    console.log(this.tabOne.name);
   }
 
   ngOnInit(): void {

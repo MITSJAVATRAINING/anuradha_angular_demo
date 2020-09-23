@@ -10,6 +10,8 @@ import { MaterialModule } from './material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AwsEnablersComponent } from './aws-enablers/aws-enablers.component';
 import { EmpModalComponent } from './emp-modal/emp-modal.component';
+import { TabOneComponent } from './tab-one/tab-one.component';
+import { TabTwoComponent } from './tab-two/tab-two.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +19,9 @@ import { EmpModalComponent } from './emp-modal/emp-modal.component';
     AddDepartmentComponent,
     MatCardExampleComponent,
     AwsEnablersComponent,
-    EmpModalComponent
+    EmpModalComponent,
+    TabOneComponent,
+    TabTwoComponent
   ],
   imports: [
     BrowserModule,

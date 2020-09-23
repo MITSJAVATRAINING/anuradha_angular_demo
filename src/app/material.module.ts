@@ -10,6 +10,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [],
   imports: [
@@ -19,7 +20,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatInputModule,
     MatCheckboxModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTabsModule,
   ],
   exports: [
     MatCardModule,
@@ -27,7 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatInputModule,
     MatCheckboxModule,
-    MatDialogModule
-  ]
+    MatDialogModule,
+    MatTabsModule,
+  ],
 })
-export class MaterialModule { }
+export class MaterialModule {}
